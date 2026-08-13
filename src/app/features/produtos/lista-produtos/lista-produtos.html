@@ -1,0 +1,31 @@
+
+<h2>Total de Produtos : {{totalprodutos()}}</h2>
+<h3>Valor Total : {{valorTotal() |currency:'BRL'}}</h3>
+<h2>
+    Produto Selecionado:
+    @if (produtosselecionado()) {
+        <strong style="color: aqua;">{{produtosselecionado()}} </strong>
+    }@else {
+        <span style="color: brown;">Nenhum </span>
+    }
+</h2>
+
+    @for (item of produtos (); track item.nome) {
+        <app-produto 
+        [nome]="item.nome"
+        [preco]="item.preco"
+        (produtoselecionado)="exibirProduto($event)"
+        >
+        
+
+        </app-produto>
+        <!-- <h2>{{item.nome }}</h2>
+    @if (item.nome) {
+        <p>Preço {{item.preco }}</p>
+    } -->
+} 
+
+<button (click)="adicionarProduto()">adicionar Produto</button>
+<button (click)="substituirProduto()">Substituir Produtos</button>
+
+
