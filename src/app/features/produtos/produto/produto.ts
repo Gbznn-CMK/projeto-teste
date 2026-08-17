@@ -5,7 +5,7 @@ import { CaptalizePipe } from '../../../shared/pipes/captalize-pipe';
 
 @Component({
   selector: 'app-produto',
-  imports: [CurrencyPipe,UpperCasePipe,PrecoFormatadoPipe,CaptalizePipe],
+  imports: [CurrencyPipe,CaptalizePipe],
   templateUrl: './produto.html',
   styleUrl: './produto.css',
 })

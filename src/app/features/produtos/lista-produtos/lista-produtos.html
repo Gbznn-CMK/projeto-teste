@@ -1,4 +1,5 @@
 
+<section>
 <h2>Total de Produtos : {{totalprodutos()}}</h2>
 <h3>Valor Total : {{valorTotal() |currency:'BRL'}}</h3>
 <h2>
@@ -17,8 +18,9 @@
         (produtoselecionado)="exibirProduto($event)"
         >
         
-
         </app-produto>
+        <button (click)="adicionarAoCarrinho(item)">Adicionar ao Carrinho </button>
+
         <!-- <h2>{{item.nome }}</h2>
     @if (item.nome) {
         <p>Preço {{item.preco }}</p>
@@ -28,4 +30,14 @@
 <button (click)="adicionarProduto()">adicionar Produto</button>
 <button (click)="substituirProduto()">Substituir Produtos</button>
 
+</section>
+<hr/> 
+<section>
+<h2>Carrinho :</h2>
+@for (item of carrinho() ; track $index) {
+    <p> {{item.nome}} - {{item.preco | currency :'BRL'}}</p>
+}
+<p><strong>Itens do Carrinho :</strong>{{quantidadeCarrinho()}}</p>
+<p><strong>Total do Carrinho : </strong>{{totalCarrinho()}}</p>
+</section>
 

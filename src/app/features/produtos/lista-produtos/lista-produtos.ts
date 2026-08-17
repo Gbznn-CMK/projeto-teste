@@ -2,6 +2,7 @@ import { Component, signal , computed , effect, Signal } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { CurrencyPipe } from '@angular/common';
 
+
 @Component({
   selector: 'app-lista-produtos',
   imports: [Produto , CurrencyPipe],
@@ -18,11 +19,9 @@ export class ListaProdutos {
     })
      
     effect(() =>{
-      document.title ='(${this.totalprodutos}$) Minha Loja '
+      document.title = ''
     })
   };
-
-
   produtos = signal<
     {
       nome: string;
@@ -30,9 +29,20 @@ export class ListaProdutos {
     }[]
   >([]);
 
+
+  carrinho = signal < {nome:string , preco:number}[]> ([]);
+
+quantidadeCarrinho = computed (() => this.carrinho().length);
+ 
+totalCarrinho = computed (() =>this.carrinho().reduce((total,item)=> total + item.preco, 0));
+
+
+
   produtosselecionado = signal < string | null>(null);
 
+
 totalprodutos = computed(() =>this.produtos().length);
+
 
 valorTotal = computed(() => {
   return this.produtos().reduce(
@@ -82,6 +92,13 @@ valorTotal = computed(() => {
     }
   }
 
+  adicionarAoCarrinho(produtos: { nome: string; preco: number }) {
+this.carrinho.update(listaCarrinhoAtual => [
+...listaCarrinhoAtual
+,produtos
+]);
+}
+  
   substituirProduto(){
     this.produtos.set([
       {nome:'Produto Novo', preco:940 }
