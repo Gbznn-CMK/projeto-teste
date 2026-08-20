@@ -27,15 +27,15 @@
     } -->
 } 
 
-<button (click)="adicionarProduto()">adicionar Produto</button>
-<button (click)="substituirProduto()">Substituir Produtos</button>
+<!-- <button (click)="adicionarProduto()">adicionar Produto</button>
+<button (click)="substituirProduto()">Substituir Produtos</button> -->
 
 </section>
 <hr/> 
 <section>
 <h2>Carrinho :</h2>
 @for (item of carrinho() ; track $index) {
-    <p> {{item.nome}} - {{item.preco | currency :'BRL'}}</p>
+    <p> {{item.nome}} - {{item.preco| currency :'BRL'}}</p>
 }
 <p><strong>Itens do Carrinho :</strong>{{quantidadeCarrinho()}}</p>
 <p><strong>Total do Carrinho : </strong>{{totalCarrinho()}}</p>

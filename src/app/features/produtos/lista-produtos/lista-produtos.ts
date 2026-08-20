@@ -1,7 +1,9 @@
-import { Component, signal , computed , effect, Signal } from '@angular/core';
+import { Component, signal , computed , effect, Signal, inject } from '@angular/core';
 import { Produto } from '../produto/produto';
 import { CurrencyPipe } from '@angular/common';
+import { ProdutosService } from '../produtos.services';
 
+type produtotype = {nome : string,preco:number}// serve para usar este tipo sem precisar ficar toda hora classificando variavel como : produtos = siganal <produtotype>
 
 @Component({
   selector: 'app-lista-produtos',
@@ -11,6 +13,9 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ListaProdutos {
   constructor() {
+    
+    this.carregarProdutos();
+
     effect(() => {
     console.log('Lista de Produtos alteradas :', this.produtos())
     })
@@ -22,6 +27,9 @@ export class ListaProdutos {
       document.title = ''
     })
   };
+
+  private produtoService= inject(ProdutosService);
+
   produtos = signal<
     {
       nome: string;
@@ -29,8 +37,9 @@ export class ListaProdutos {
     }[]
   >([]);
 
+  carregando = signal (true);
 
-  carrinho = signal < {nome:string , preco:number}[]> ([]);
+  carrinho = signal < produtotype[]> ([]);
 
 quantidadeCarrinho = computed (() => this.carrinho().length);
  
@@ -90,9 +99,9 @@ valorTotal = computed(() => {
     } else {
       /* Caso contrario, não faço nada */
     }
-  }
+      } 
 
-  adicionarAoCarrinho(produtos: { nome: string; preco: number }) {
+  adicionarAoCarrinho(produtos: produtotype) {
 this.carrinho.update(listaCarrinhoAtual => [
 ...listaCarrinhoAtual
 ,produtos
@@ -104,7 +113,23 @@ this.carrinho.update(listaCarrinhoAtual => [
       {nome:'Produto Novo', preco:940 }
     ]) 
   }
+  carregarProdutos(){this.carregando.set(true);
 
+this.produtoService.buscarProdutos()
+.subscribe({
+next: (dados) => {
+const produtos = this.produtoService
+.transformarProdutos(dados);
+this.produtos.set(produtos);
+this.carregando.set(false);
+},
+error: (erro) => {
+console.error('Erro ao carregar produtos:', erro);
+this.carregando.set(false);
+}
+});
+      }
+  
 
   exibirProduto(nome: string) {
     this.produtosselecionado.set(nome);
