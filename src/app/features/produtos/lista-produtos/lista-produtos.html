@@ -1,4 +1,22 @@
 
+@if (carregando()) {
+<p>Carregando produtos...</p>
+}
+
+@if (erro()) {
+<p style="color: red">
+{{ erro() }}
+</p>
+<button m (click)="carregarProdutos()">Tentar novamente</button>
+}
+
+@if (!carregando() && !erro()) {
+<p>Total de produtos: {{ totalprodutos() }}</p>
+<hr />
+@for (item of produtos(); track $index) {
+<app-produto [nome]="item.nome" [preco]="item.preco" />
+}
+}
 <section>
 <h2>Total de Produtos : {{totalprodutos()}}</h2>
 <h3>Valor Total : {{valorTotal() |currency:'BRL'}}</h3>
@@ -19,7 +37,7 @@
         >
         
         </app-produto>
-        <button (click)="adicionarAoCarrinho(item)">Adicionar ao Carrinho </button>
+        <button mat-raised-button (click)="adicionarAoCarrinho(item)">Adicionar ao Carrinho </button>
 
         <!-- <h2>{{item.nome }}</h2>
     @if (item.nome) {

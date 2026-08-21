@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Produto } from '../../produtos/produto/produto';
+
 
 @Component({
   selector: 'app-home',

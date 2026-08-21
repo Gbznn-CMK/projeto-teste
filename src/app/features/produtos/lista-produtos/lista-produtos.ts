@@ -2,12 +2,13 @@ import { Component, signal , computed , effect, Signal, inject } from '@angular/
 import { Produto } from '../produto/produto';
 import { CurrencyPipe } from '@angular/common';
 import { ProdutosService } from '../produtos.services';
+import { MatButtonModule } from '@angular/material/button';
 
 type produtotype = {nome : string,preco:number}// serve para usar este tipo sem precisar ficar toda hora classificando variavel como : produtos = siganal <produtotype>
 
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto , CurrencyPipe],
+  imports: [Produto , CurrencyPipe , MatButtonModule],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
@@ -28,6 +29,8 @@ export class ListaProdutos {
     })
   };
 
+  erro = signal<string | null>(null);
+
   private produtoService= inject(ProdutosService);
 
   produtos = signal<
@@ -47,7 +50,7 @@ totalCarrinho = computed (() =>this.carrinho().reduce((total,item)=> total + ite
 
 
 
-  produtosselecionado = signal < string | null>(null);
+produtosselecionado = signal < string | null>(null);
 
 
 totalprodutos = computed(() =>this.produtos().length);
@@ -60,7 +63,7 @@ valorTotal = computed(() => {
  
 
 
-  produtosNovos = [
+    produtosNovos = [
     { nome: 'notebook', preco: 3500 },
     { nome: 'Mouse', preco: 150 },
     { nome: 'Teclado', preco: 250.55 },
@@ -125,6 +128,7 @@ this.carregando.set(false);
 },
 error: (erro) => {
 console.error('Erro ao carregar produtos:', erro);
+this.erro.set('Erro ao carregar produtos. Verifique sua conexão e tente novamente.');
 this.carregando.set(false);
 }
 });
