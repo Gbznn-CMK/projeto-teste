@@ -58,7 +58,7 @@ totalprodutos = computed(() =>this.produtos().length);
 
 valorTotal = computed(() => {
   return this.produtos().reduce(
-    (total, item ) => total + item.preco , 0)
+    (total, item ) => total + item.preco , 5)
 })
  
 

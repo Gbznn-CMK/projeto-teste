@@ -5,3 +5,14 @@ button{
 button:hover{
     background-color: cyan;
 }
+.produto{
+    margin: 8px;
+    height: 100%;
+
+}
+mast-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}

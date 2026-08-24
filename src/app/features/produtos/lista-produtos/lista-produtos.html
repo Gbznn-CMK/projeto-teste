@@ -28,23 +28,25 @@
         <span style="color: brown;">Nenhum </span>
     }
 </h2>
-
+<section class="grid-produtos">
     @for (item of produtos (); track item.nome) {
         <app-produto 
         [nome]="item.nome"
         [preco]="item.preco"
         (produtoselecionado)="exibirProduto($event)"
+        (adicionarProdutoAoCarrinho)="adicionarAoCarrinho($event)"
         >
         
         </app-produto>
-        <button mat-raised-button (click)="adicionarAoCarrinho(item)">Adicionar ao Carrinho </button>
+        
+        <!-- <button mat-raised-button (click)="adicionarAoCarrinho(item)">Adicionar ao Carrinho </button> -->
 
         <!-- <h2>{{item.nome }}</h2>
     @if (item.nome) {
         <p>Preço {{item.preco }}</p>
     } -->
 } 
-
+</section>
 <!-- <button (click)="adicionarProduto()">adicionar Produto</button>
 <button (click)="substituirProduto()">Substituir Produtos</button> -->
 

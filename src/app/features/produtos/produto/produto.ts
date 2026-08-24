@@ -15,9 +15,21 @@ export class Produto {
   @Input() nome = '';
   @Input() preco = 0;
   @Output() produtoselecionado = new EventEmitter();
+  @Output() adicionarProdutoAoCarrinho = new EventEmitter();
   mostrapreco = true;
 
   selecionarProduto() {
     this.produtoselecionado.emit(this.nome);
   }
+  adicionarAoCarrinho(){
+    this.adicionarProdutoAoCarrinho.emit({
+      nome : this.nome,
+      preco : this.preco
+    });
+  }
 }
+
+
+
+
+
