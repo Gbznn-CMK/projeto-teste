@@ -5,6 +5,7 @@ mat-toolbar{
     z-index: 1000;
     text-align: fixed;
     flex-wrap: wrap;
+    background-color: azure;
 }
 .flex-spacer{
     flex: 1 1 auto;
@@ -12,3 +13,9 @@ mat-toolbar{
 button{
     margin-left: 8px;
 }
+.bloco-controle{
+     margin-bottom: 16px;
+    display: block;
+    justify-self:left;
+    text-align: left;
+}   

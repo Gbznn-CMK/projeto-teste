@@ -1,18 +1,10 @@
-button{
-    background-color: azure;
+.produto {
+  margin: 8px;
+  height: 100%;
 }
-
-button:hover{
-    background-color: cyan;
-}
-.produto{
-    margin: 8px;
-    height: 100%;
-
-}
-mast-card{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+mat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }

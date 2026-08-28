@@ -1,35 +1,27 @@
-import { Component, EventEmitter, input, Input, Output, output } from '@angular/core';
-import { CurrencyPipe, UpperCasePipe } from '@angular/common';
-import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
-import { CaptalizePipe } from '../../../shared/pipes/captalize-pipe';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-
+import { itemCarrinhotype } from '../../../core/models/item-carrinho';
 @Component({
   selector: 'app-produto',
-  imports: [CurrencyPipe, CaptalizePipe, MatButtonModule, MatCardModule],
+  imports: [CurrencyPipe, MatButtonModule, MatCardModule],
   templateUrl: './produto.html',
   styleUrl: './produto.css',
 })
 export class Produto {
-  @Input() nome = '';
-  @Input() preco = 0;
-  @Output() produtoselecionado = new EventEmitter();
-  @Output() adicionarProdutoAoCarrinho = new EventEmitter();
-  mostrapreco = true;
+  @Input() nome: string = '';
+  @Input() preco: number = 0;
+  @Output() produtoSelecionado = new EventEmitter();
+  @Output() adicionarProdutoAoCarrinho = new EventEmitter<itemCarrinhotype>();
 
   selecionarProduto() {
-    this.produtoselecionado.emit(this.nome);
+    this.produtoSelecionado.emit(this.nome);
   }
-  adicionarAoCarrinho(){
+  adicionarAoCarrinho() {
     this.adicionarProdutoAoCarrinho.emit({
-      nome : this.nome,
-      preco : this.preco
+      nome: this.nome,
+      preco: this.preco,
     });
   }
 }
-
-
-
-
-
